@@ -86,7 +86,7 @@ get_balance(), set_balance(amount)
 get_name(), set_name(name)
 display_account()
 
-SavingsAccounT (inherits from BankAccount) :
+SavingsAccount (inherits from BankAccount) :
 
 Additional Attribute: interest_rate
 Additional Methods:

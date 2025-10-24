@@ -9,12 +9,13 @@ class BankAccount:
         if amount is None:
             try:
                 amount = float(input("Enter deposit amount: "))
-            except Exception:
+            except ValueError:
                 print("Invalid amount.")
                 return
         if amount <= 0:
             print("Deposit amount must be positive.")
             return
+
         self.balance += amount
         print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
 
@@ -22,7 +23,7 @@ class BankAccount:
         if amount is None:
             try:
                 amount = float(input("Enter withdrawal amount: "))
-            except Exception:
+            except ValueError:
                 print("Invalid amount.")
                 return
         if amount <= 0:
@@ -31,6 +32,7 @@ class BankAccount:
         if amount > self.balance:
             print("Insufficient funds.")
             return
+
         self.balance -= amount
         print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
 
