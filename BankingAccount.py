@@ -1,53 +1,84 @@
-class BankAccount:
-    def __init__(self, initial_balance=0.0):
-        self.balance = float(initial_balance)
+import abc
 
-    def show_balance(self):
-        print(f"Current balance: ${self.balance:.2f}")
+class User:
+    def __init__(self, name, age, gender):
+        self._name = name
+        if age < 18:
+            raise ValueError("Age must be at least 18 to open a bank account.")
+        self._age = age
+        valid_genders = {'male', 'female', 'other'}
+        if gender.lower() not in valid_genders:
+            raise ValueError(f"Gender must be one of {valid_genders}.")
+        self._gender = gender
 
-    def deposit(self, amount=None):
-        if amount is None:
-            try:
-                amount = float(input("Enter deposit amount: "))
-            except ValueError:
-                print("Invalid amount.")
-                return
-        if amount <= 0:
-            print("Deposit amount must be positive.")
-            return
+    def display_details(self):
+        print("-" * 30)
+        print("PERSONAL DETAILS")
+        print(f"Name: {self._name}")
+        print(f"Age: {self._age}")
+        print(f"Gender: {self._gender}")
+        print("-" * 30)
 
-        self.balance += amount
-        print(f"Deposited ${amount:.2f}. New balance: ${self.balance:.2f}")
+class BankOperations(abc.ABC):
+    @abc.abstractmethod
+    def deposit(self, amount):
+        pass
+    
+    @abc.abstractmethod
+    def withdraw(self, amount):
+        pass
 
-    def withdraw(self, amount=None):
-        if amount is None:
-            try:
-                amount = float(input("Enter withdrawal amount: "))
-            except ValueError:
-                print("Invalid amount.")
-                return
-        if amount <= 0:
-            print("Withdrawal amount must be positive.")
-            return
-        if amount > self.balance:
-            print("Insufficient funds.")
-            return
+    @abc.abstractmethod
+    def view_balance(self):
+        pass
 
-        self.balance -= amount
-        print(f"Withdrew ${amount:.2f}. New balance: ${self.balance:.2f}")
+class BankAccount(BankOperations): 
+    _account_counter = 1000  
 
-    def __str__(self):
-        return f"BankAccount(balance=${self.balance:.2f})"
+    def __init__(self, name, age, gender):
+        self.user = User(name, age, gender) 
+        self.__balance = 0
+        self.__account_number = BankAccount._account_counter
+        BankAccount._account_counter += 1 
+        print(f"\nAccount created successfully for {name}!")
+        print(f"Your Account Number is: {self.__account_number}")
 
-class SavingAccount(BankAccount):
-    def __init__(self, initial_balance=0.0, interest_rate=0.02):
-        super().__init__(initial_balance)
-        self.interest_rate = float(interest_rate)
 
-    def apply_interest(self):
-        interest = self.balance * self.interest_rate
-        self.balance += interest
-        print(f"Applied interest ${interest:.2f} at rate {self.interest_rate*100:.2f}%. New balance: ${self.balance:.2f}")
+    def display_details(self):
+        self.user.display_details()
+        print("ACCOUNT DETAILS")
+        print(f"Account No: {self.__account_number}")
+        print(f"Current Balance: ${self.__balance:.2f}")
+        print("-" * 30)
 
-    def __str__(self):
-        return f"SavingAccount(balance=${self.balance:.2f}, interest_rate={self.interest_rate:.2f})"
+    def deposit(self, amount):
+        """Deposits a positive amount to the account."""
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposit Successful. Amount: ${amount:.2f}")
+        else:
+            print("Invalid deposit amount. Must be positive.")
+        self.view_balance()
+
+    def withdraw(self, amount):
+        """Withdraws amount if sufficient balance exists."""
+        if amount > 0:
+            if self.__balance >= amount:
+                self.__balance -= amount
+                print(f"Withdrawal Successful. Amount: ${amount:.2f}")
+            else:
+                print("Withdrawal failed. Insufficient balance.")
+        else:
+            print("Invalid withdrawal amount. Must be positive.")
+        self.view_balance()
+
+    def view_balance(self):
+        """Prints the current account balance."""
+        print(f"Updated Balance: ${self.__balance:.2f}")
+        
+    def get_account_number(self):
+        """Getter for the account number."""
+        return self.__account_number
+
+
+

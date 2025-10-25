@@ -4,29 +4,29 @@ The project demonstrates Encapsulation, Inheritance, Polymorphism, and Abstracti
 
 bankaccount.py
 
-savingaccount.py
-
 main.py 
 
  README.md 
 
+
 ### CONCEPT USED
 OOP Concept used
 
-* Encapsulation Hiding data using private attributes
+* Encapsulation : bundling data into single unit
 
-* Inheritance Reusing the base class savingaccount
+* Inheritance:child class allow to uses parentclass
 
-* Polymorphism single action different ways(display_account) used in both class es 
+* Polymorphism : object to take multiple form depending upon the context used
 
-* Abstraction User interacts through a menu, not inner details (main.py)
+* Abstraction :showing necessary information hiding internal information
 
 ### FEATURES
 1. Create a savings account
-2. Deposit and withdraw money
-3. View account details
-4. Check current balance
-5. Add interest automatically-- Fully encapsulated and modular design
+2. Deposit funds
+3. withdraw funds
+4. view account detail and  balance
+5. exit system
+
 
 ### Installation & Setup
 Clone or Download this project folder:
@@ -35,71 +35,113 @@ git clone : https://github.com/VITHUN007/banking.git
 Ensure Python is installed:
 python --version
 
-SAMPLE OUTPUT
-Account created with initial balance: $500.00 Savings Account setup with rate: 2.0%
-Savings Account Program
+### SAMPLE OUTPUT
+--- NEW ACCOUNT REGISTRATION ---
+Enter account holder's name: abg
 
-1. Show Balance
-2. Deposit
-3. withdraw
- 4. Apply Interest
-5. View Account Status
-6. Exit
+Enter age: 19
 
-Enter your choice (1-6): 1
+Enter gender: male
 
-Your balance is $500.00
+Account created successfully for abg!
 
-Savings Account Program
+Your Account Number is: 1000
 
-1.Show Balance 2.Deposit 3.Withdraw 4.Apply Interest 5.View Account Status 6.Exit
+What would you like to do?
+1. Create New Account
+2. Deposit Funds
+3. Withdraw Funds
+4. View Account Details & Balance
+5. Exit System
+Enter choice (1-5): 2
 
-Enter your choice (1-6): 4
+--- DEPOSIT TRANSACTION ---
+*Enter your Account Number: 1000
 
-Interest of $5.00 applied.
+Enter amount to deposit: $5000
 
-Your balance is $505.00
+Deposit Successful. Amount: $5000.00
 
-Savings Account Program
+Updated Balance: $5000.00
 
-1.Show Balance 2.Deposit 3.Withdraw 4.Apply Interest 5.View Account Status 6.Exit
+What would you like to do?
+1. Create New Account
+2. Deposit Funds
+3. Withdraw Funds
+4. View Account Details & Balance
+5. Exit System
+Enter choice (1-5): 3
 
-Enter your choice (1-6): 2
+--- WITHDRAW TRANSACTION ---
+Enter your Account Number: 1000
 
-Enter an amount to be deposited: 45 Deposit of $45.00 successful.
+Enter amount to withdraw: $1000 
 
-Savings Account Program
+Withdrawal Successful. Amount: $1000.00
 
-1.Show Balance 2.Deposit 3.Withdraw 4.Apply Interest 5.View Account Status 6.Exit
+Updated Balance: $4000.00
 
-Enter your choice (1-6): 1
+What would you like to do?
+1. Create New Account
+2. Deposit Funds
+3. Withdraw Funds
+4. View Account Details & Balance
+5. Exit System
+Enter choice (1-5): 3
 
-Your balance is $550.00
+--- WITHDRAW TRANSACTION ---
+Enter your Account Number: 1000
 
-### Class Overview
-BankAccount :
+Enter amount to withdraw: $10000
 
-Attributes: account_number, __name, __balance
+Withdrawal failed. Insufficient balance.
 
-Methods:deposit(amount),withdraw(amount)
-get_balance(), set_balance(amount)
-get_name(), set_name(name)
-display_account()
+Updated Balance: $4000.00
 
-SavingsAccount (inherits from BankAccount) :
+What would you like to do?
+1. Create New Account
+2. Deposit Funds
+3. Withdraw Funds
+4. View Account Details & Balance
+5. Exit System
+Enter choice (1-5): 4
 
-Additional Attribute: interest_rate
-Additional Methods:
-add_interest() ,Overridden display_account()
+--- ACCOUNT DETAILS QUERY ---
+Enter your Account Number: 1
+
+PERSONAL DETAILS
+
+Name: abg
+
+Age: 19
+
+Gender: male
+
+ACCOUNT DETAILS
+
+Account No: 1000
+
+Current Balance: $4000.00
+
+
+What would you like to do?
+1. Create New Account
+2. Deposit Funds
+3. Withdraw Funds
+4. View Account Details & Balance
+5. Exit System
+Enter choice (1-5): 5
+
+Thank you. Goodbye!
+
+
 
 ### Learning Outcome
-By studying and running this project, you’ll understand how:
+* By studying and running this project, you’ll understand how:
 
-OOP concepts work together in Python
+* OOP concepts work together in Python
 
-Private, protected, and public access modifiers function
+* To organize a Python project using multiple modules
 
-To organize a Python project using multiple modules
-
-Real-world problems can be modeled using classes and inheritance
+* Real-world problems can be modeled using classes and inheritance
 
