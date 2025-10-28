@@ -2,7 +2,7 @@
 The project demonstrates Encapsulation, Inheritance, Polymorphism, and Abstraction — implemented with separate class files for modular design.
 ### bankproject Structure
 
-bankaccount.py
+BankingAccount.py
 
 main.py 
 
@@ -19,6 +19,13 @@ OOP Concept used
 * Polymorphism : object to take multiple form depending upon the context used
 
 * Abstraction :showing necessary information hiding internal information
+
+
+| Class | Role | Key OOP Concept |
+|---|---|---|
+| User | Handles personal identity (name, age, gender)| Encapsulation (Validates and stores user details).
+BankOperations | Defines the required banking methods (deposit, withdraw, view_balance) | Abstraction / Inheritance (A blueprint for all accounts).
+BankAccount | Handles the finances (balance, account number). |Composition (A bank account has a User).
 
 ### FEATURES
 1. Create a savings account

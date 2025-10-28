@@ -2,10 +2,14 @@ import abc
 
 class User:
     def __init__(self, name, age, gender):
+        if not name.replace(' ', '').isalpha():
+            raise ValueError("Username (name) must contain only alphabetic characters.")
         self._name = name
+
         if age < 18:
             raise ValueError("Age must be at least 18 to open a bank account.")
         self._age = age
+        
         valid_genders = {'male', 'female', 'other'}
         if gender.lower() not in valid_genders:
             raise ValueError(f"Gender must be one of {valid_genders}.")
@@ -22,15 +26,20 @@ class User:
 class BankOperations(abc.ABC):
     @abc.abstractmethod
     def deposit(self, amount):
-        pass
+        if amount <= 0:
+            raise ValueError("Transaction amount must be positive.")
     
     @abc.abstractmethod
     def withdraw(self, amount):
-        pass
-
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be positive.")
+        
     @abc.abstractmethod
     def view_balance(self):
-        pass
+        if self.__balance < 0:
+            print(f" Warning: Account Overdrawn! Balance: ${self.__balance:.2f}")
+        else:
+            print(f"Updated Balance: ${self.__balance:.2f}")
 
 class BankAccount(BankOperations): 
     _account_counter = 1000  
@@ -52,7 +61,6 @@ class BankAccount(BankOperations):
         print("-" * 30)
 
     def deposit(self, amount):
-        """Deposits a positive amount to the account."""
         if amount > 0:
             self.__balance += amount
             print(f"Deposit Successful. Amount: ${amount:.2f}")
@@ -61,7 +69,6 @@ class BankAccount(BankOperations):
         self.view_balance()
 
     def withdraw(self, amount):
-        """Withdraws amount if sufficient balance exists."""
         if amount > 0:
             if self.__balance >= amount:
                 self.__balance -= amount
@@ -73,11 +80,9 @@ class BankAccount(BankOperations):
         self.view_balance()
 
     def view_balance(self):
-        """Prints the current account balance."""
         print(f"Updated Balance: ${self.__balance:.2f}")
         
     def get_account_number(self):
-        """Getter for the account number."""
         return self.__account_number
 
 

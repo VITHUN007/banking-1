@@ -27,16 +27,36 @@ if __name__ == "__main__":
                 print(f"An unexpected error occurred: {e}. Please try again.")
 
     def create_account_flow():
-        print("\n--- NEW ACCOUNT REGISTRATION ---")
-        name = get_valid_input("Enter account holder's name: ")
-        age = get_valid_input("Enter age: ", int)
-        gender = get_valid_input("Enter gender: ")
-        
-        try:
-            new_account = BankAccount(name, age, gender) 
-            accounts[new_account.get_account_number()] = new_account
-        except Exception as e:
-            print(f"Could not create account: {e}")
+        print("\n--- CREATE NEW ACCOUNT ---")
+        name = get_valid_input("Enter your Name: ")
+        age = get_valid_input("Enter your Age: ", int)
+        gender = get_valid_input("Enter your Gender (Male/Female/Other): ") 
+
+        while True:     
+            try:
+                new_account = BankAccount(name, age, gender) 
+                accounts[new_account.get_account_number()] = new_account
+                break
+
+            except ValueError as e:
+                error_msg = str(e)
+                print(f"Could not create account: {error_msg}")
+                
+                if "alphabetic characters" in error_msg:
+                    print("Please re-enter a valid name (alphabetic only).")
+                    name = get_valid_input("Enter account holder's name: ")
+                elif "Age must be at least 18" in error_msg:
+                    print("Please re-enter a valid age.")
+                    age = get_valid_input("Enter age: ", int)
+                elif "Gender must be one of" in error_msg:
+                    print("Please re-enter a valid gender.")
+                    gender = get_valid_input("Enter gender: ")
+                else:
+                    break
+            
+            except Exception as e:
+                print(f"Could not create account: {e}")
+                break 
 
     def transaction_flow(action):
         print(f"\n--- {action.upper()} TRANSACTION ---")
